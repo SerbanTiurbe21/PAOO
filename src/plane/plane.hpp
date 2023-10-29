@@ -6,6 +6,9 @@ class Plane {
         // constructor
         Plane(std::string model, int capacity, double maxSpeed, double fuelCapacity, double maxAltitute, std::string pilotName);
 
+        // copy constructor
+        Plane(const Plane &plane);
+
         // destructor
         ~Plane();
 

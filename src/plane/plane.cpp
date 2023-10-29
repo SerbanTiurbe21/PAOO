@@ -13,6 +13,16 @@ Plane::Plane(std::string model, int capacity, double maxSpeed, double fuelCapaci
     pilot = new Pilot(pilotName);
 }
 
+// copy constructor
+Plane::Plane(const Plane &plane){
+    this->model = plane.model;
+    this->capacity = plane.capacity;
+    this->maxSpeed = plane.maxSpeed;
+    this->fuelCapacity = plane.fuelCapacity;
+    this->maxAltitute = plane.maxAltitute;
+    this->pilot = new Pilot(*plane.pilot);
+}
+
 // destructor
 Plane::~Plane(){
     std::cout << "Plane " << this->model << " destroyed" << std::endl;

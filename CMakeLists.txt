@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.1.0)
 
 # Set the project name and version
 project(MyProject VERSION 1.0)

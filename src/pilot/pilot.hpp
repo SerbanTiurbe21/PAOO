@@ -1,4 +1,5 @@
-#ifndef PILOT_HPP  // Include guard
+// Include guard
+#ifndef PILOT_HPP
 #define PILOT_HPP
 
 #include <string>
