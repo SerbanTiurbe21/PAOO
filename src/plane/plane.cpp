@@ -22,6 +22,19 @@ Plane::Plane(std::string model, int capacity, double maxSpeed, double fuelCapaci
 /*
     used when we want to copy an object
     for example: Plane plane2(plane); where plane already is an existing object -> this will call the copy constructor
+    in our copy constructor we use deep copy because we specifically create a new Pilot object on the heap and we copy the content from the source Plane object's Pilot into it.
+    if we would have used shallow copy, we would have copied the address of the source Plane object's Pilot into the destination Plane object's Pilot.
+    shallow copy is applied only if we have no dynamic memory allocation in the class 
+
+    shallow copy: we copy the address of the pilot object from plane to plane2 -> we use shallow copy when we want to have 2 planes with the same address 
+    deep copy: we copy the pilot object from plane to plane2 -> in here we use deep copy because we want to have 2 different planes with different addresses
+*/
+/*
+    In a shallow copy, the data members of one object are copied into the data members of another object without duplicating heap-allocated memory.
+    So if we change the data members of one object, the data members of the other object will also change.
+
+    In a deep copy, the data members of one object are copied into the data members of another object along with duplicating heap-allocated memory.
+    So if we change the data members of one object, the data members of the other object will not change.  
 */
 Plane::Plane(const Plane &plane){
     this->model = plane.model;
@@ -36,6 +49,7 @@ Plane::Plane(const Plane &plane){
 /*
     used when we want to assign an object to another
     for example: plane2 = plane; where plane and plane2 already are existing objects -> this will call the assignment operator
+    we use & to get the address of the object
 */
 Plane& Plane::operator=(const Plane& other) {
     // the case where we assign an object to itself and we want to return the object
