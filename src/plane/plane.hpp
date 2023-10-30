@@ -9,6 +9,9 @@ class Plane {
         // copy constructor
         Plane(const Plane &plane);
 
+        // assignment operator
+        Plane& operator=(const Plane& other);
+
         // destructor
         ~Plane();
 

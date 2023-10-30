@@ -1,14 +1,13 @@
-# Include the subdirectory containing our PlaneLibrary
+# here we include the subdirectory containing our PlaneLibrary and PilotLibrary
 add_subdirectory(pilot)
 add_subdirectory(plane)
 
-# Create an executable target
+# here we create an executable target
 add_executable(MyExecutable main.cpp)
 
-# Link PlaneLibrary to the executable
+# here we link PlaneLibrary and PilotLibrary to the executable
 target_link_libraries(MyExecutable PRIVATE PlaneLibrary PilotLibrary)
-# target_link_libraries(MyExecutable PRIVATE PilotLibrary)
 
-# Include the plane directory so that plane.hpp can be found
+# here we include the plane directory and pilot directory so that plane.hpp and pilot.hpp can be found
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/plane)
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/pilot)
