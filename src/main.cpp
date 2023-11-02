@@ -11,7 +11,8 @@ void menu(){
     std::cout << "2. Add a new pilot" << std::endl;
     std::cout << "3. Get all the planes from the hangar" << std::endl;
     std::cout << "4. Get all the pilots from the hangar" << std::endl; 
-    std::cout << "5. Copy one plane to another" << std::endl;
+    std::cout << "5. Copy one plane to another using overloaded assignment operator" << std::endl;
+    std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -68,7 +69,7 @@ int main(int, char**){
             case 3:{
                 std::cout << "Get all the planes from the hangar" << std::endl;
                 for(int i = 0; i < planes.size(); i++){
-                    std::cout << "Plane " << i << ": " << planes[i].getModel() << planes[i].getPilot()->getName() << std::endl;
+                    std::cout << "Plane " << i << ": " << planes[i].getModel() << " " << planes[i].getPilot()->getName() << std::endl;
                 }
             }
             break;
@@ -99,6 +100,28 @@ int main(int, char**){
                     // I want to remove the destination plane from the vector
                     Pilot *pilot = planes[destIndex].getPilot();
                     planes[destIndex] = planes[sourceIndex];
+                    std::cout << "Successfully copied the plane." << std::endl;
+                }
+            }
+            break;
+            case 6:{
+                if(planes.empty()){
+                    std::cout << "There are no planes in the hangar." << std::endl;
+                    break;
+                }
+
+                std::cout << "Create a new plane based on an existing one" << std::endl;
+                std::cout << "Enter the index of the source plane: ";
+                int sourceIndex;
+                std::cin >> sourceIndex;
+
+                if (sourceIndex < 0 || sourceIndex >= planes.size()) {
+                    std::cout << "Invalid indices." << std::endl;
+                } else {
+                    // I want to remove the destination plane from the vector
+                    // planes[destIndex] = Plane(planes[sourceIndex]);
+                    Plane plane = Plane(planes[sourceIndex]);
+                    planes.push_back(plane);
                     std::cout << "Successfully copied the plane." << std::endl;
                 }
             }
