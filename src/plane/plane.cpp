@@ -134,3 +134,7 @@ void Plane::setFuelCapacity(double fuelCapacity){
 void Plane::setMaxAltitute(double maxAltitute){
     this->maxAltitute = maxAltitute;
 }
+
+void Plane::setPilot(Pilot *pilot){
+    this->pilot = pilot;
+}

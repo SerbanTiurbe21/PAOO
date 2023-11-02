@@ -29,6 +29,7 @@ class Plane {
         void setMaxSpeed(double maxSpeed);
         void setFuelCapacity(double fuelCapacity);
         void setMaxAltitute(double maxAltitute);
+        void setPilot(Pilot *pilot);
 
     private:
         std::string model;
