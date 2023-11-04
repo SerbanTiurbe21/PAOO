@@ -31,6 +31,7 @@ int main(int, char**){
 
     // Vector of planes (basically the hangar)
     std::vector<Plane> planes;
+    std::vector<Plane> secondHangar;
 
     // Association of pilots
     std::vector<Pilot> pilots;
@@ -159,7 +160,7 @@ int main(int, char**){
                     break;
                 }
 
-                std::cout << "Transfer a plane to a new owner" << std::endl;
+                std::cout << "Transfer a plane to another hangar" << std::endl;
                 std::cout << "Enter the index of the source plane: ";
                 int sourceIndex;
                 std::cin >> sourceIndex;
@@ -167,20 +168,13 @@ int main(int, char**){
                 if (sourceIndex < 0 || sourceIndex >= planes.size()) {
                     std::cout << "Invalid indices." << std::endl;
                 } else {
-                    Plane plane = std::move(planes[sourceIndex]);
+                    secondHangar.push_back(std::move(planes[sourceIndex]));
                     planes.pop_back();
                     std::cout << "Successfully moved the plane." << std::endl;
+                    for (int i = 0; i < secondHangar.size(); i++) {
+                        std::cout << "Plane " << i << ": " << secondHangar[i].getModel() << " " << secondHangar[i].getPilot()->getName() << std::endl;
+                    }
                 }
-                // std::cout << "Transferring a plane to a new owner" << std::endl;
-                // if (!planes.empty()) {
-                //     std::cout << "Transferring the last plane in the hangar" << std::endl;
-                //     Plane movedPlane = std::move(planes.back()); // calls move constructor
-                //     planes.pop_back(); // remove the original after moving
-                //     // Optionally, handle the movedPlane
-                //     // ...
-                // } else {
-                //     std::cout << "Hangar is empty, no plane to transfer!" << std::endl;
-                // }
             }
             break;
             case 0:
