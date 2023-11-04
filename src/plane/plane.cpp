@@ -3,6 +3,16 @@
 #include "pilot.hpp"
 #include <string>
 
+// DEFAULT CONSTRUCTOR
+Plane::Plane(){
+    this->model = "";
+    this->capacity = 0;
+    this->maxSpeed = 0;
+    this->fuelCapacity = 0;
+    this->maxAltitute = 0;
+    pilot = new Pilot("");
+}
+
 // CONSTRUCTOR
 /*
     used when we want to create a new object

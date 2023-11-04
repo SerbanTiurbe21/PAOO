@@ -1,6 +1,7 @@
 #include <iostream>
 #include "plane.hpp"
 #include "pilot.hpp"
+#include "militaryPlane.hpp"
 #include <vector>
 
 // THE MENU FUNCTION FOR THE USER INTERFACE
@@ -13,6 +14,7 @@ void menu(){
     std::cout << "4. Get all the pilots from the hangar" << std::endl; 
     std::cout << "5. Copy one plane to another using overloaded assignment operator" << std::endl;
     std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
+    std::cout << "7. Add a new military plane" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -118,12 +120,36 @@ int main(int, char**){
                 if (sourceIndex < 0 || sourceIndex >= planes.size()) {
                     std::cout << "Invalid indices." << std::endl;
                 } else {
-                    // I want to remove the destination plane from the vector
-                    // planes[destIndex] = Plane(planes[sourceIndex]);
                     Plane plane = Plane(planes[sourceIndex]);
                     planes.push_back(plane);
                     std::cout << "Successfully copied the plane." << std::endl;
                 }
+            }
+            break;
+            case 7:{
+                std::cout << "Add a new plane" << std::endl;
+                std::string model, pilotName;
+                int capacity, speed, fuel, maxAltitude;
+                std::cout << "Model: "<< std::endl;
+                std::cin >> model;
+                std::cout << "Capacity: "<< std::endl;
+                std::cin >> capacity;
+                std::cout << "Speed: "<< std::endl;
+                std::cin >> speed;
+                std::cout << "Fuel: "<< std::endl;
+                std::cin >> fuel;
+                std::cout << "Max altitude: "<< std::endl;
+                std::cin >> maxAltitude;
+                std::cout << "Pilot name: "<< std::endl;
+                std::cin >> pilotName;
+                std::cout << "Has bombs? (1/0)" << std::endl;
+                bool hasBombs;
+                std::cin >> hasBombs;
+                std::cout << "Has missiles? (1/0)" << std::endl;
+                bool hasMissiles;
+                std::cin >> hasMissiles;
+                MilitaryPlane plane(model, capacity, speed, fuel, maxAltitude, pilotName, hasBombs, hasMissiles);
+                planes.push_back(plane);
             }
             break;
             case 0:

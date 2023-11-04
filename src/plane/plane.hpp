@@ -1,8 +1,14 @@
+// Include guard
+#ifndef PLANE_HPP
+#define PLANE_HPP
+
 #include <string>
 #include "pilot.hpp"
 
 class Plane {
     public:
+        Plane();
+
         // constructor
         Plane(std::string model, int capacity, double maxSpeed, double fuelCapacity, double maxAltitute, std::string pilotName);
 
@@ -39,3 +45,5 @@ class Plane {
         double maxAltitute;
         Pilot *pilot;
 };
+
+#endif
