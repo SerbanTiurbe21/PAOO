@@ -60,6 +60,9 @@ Plane::Plane(const Plane &plane){
     used when we want to move an object
     for example: Plane plane2(std::move(plane)); where plane already is an existing object -> this will call the move constructor
     we use std::move to move the object
+    we use it to avoid copying the object and be more efficient
+    we use it when we want to move the object to another object and we don't need the object anymore
+    we use it when we want to add the object to a collection 
 */
 Plane::Plane(Plane &&plane){
     // here we use std::move beacause the model is a string and we want to move it
@@ -71,7 +74,7 @@ Plane::Plane(Plane &&plane){
     this->pilot = plane.pilot;
     plane.pilot = nullptr;
 
-     std::cout << "Move constructor called for plane: " << this->model << std::endl;
+    std::cout << "Move constructor called for plane: " << this->model << std::endl;
 }
 // ASSIGNMENT OPERATOR
 /*

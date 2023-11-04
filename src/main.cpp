@@ -57,8 +57,8 @@ int main(int, char**){
                 std::cout << "Pilot name: "<< std::endl;
                 std::cin >> pilotName;
                 Plane plane = generatePlane(model, capacity, speed, fuel, maxAltitude, pilotName);
-                planes.push_back(plane);
                 Pilot pilot = *plane.getPilot();
+                planes.push_back(std::move(plane));
                 pilots.push_back(pilot);
             }
             break;
