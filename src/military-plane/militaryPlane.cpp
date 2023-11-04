@@ -12,7 +12,9 @@ MilitaryPlane::MilitaryPlane(std::string model,
                             bool hasMissiles) : Plane(model, capacity, maxSpeed, fuelCapacity, maxAltitude, pilotName){this->hasBombs = hasBombs; this->hasMissiles = hasMissiles;}
 
 // Destructor
-MilitaryPlane::~MilitaryPlane() {}
+MilitaryPlane::~MilitaryPlane() {
+    std::cout << "Military plane " << this->getModel() << " destroyed" << std::endl;
+}
 
 // Other member functions
 void MilitaryPlane::dropBombs() {

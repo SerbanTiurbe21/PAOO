@@ -151,7 +151,7 @@ int main(int, char**){
                 bool hasMissiles;
                 std::cin >> hasMissiles;
                 MilitaryPlane plane(model, capacity, speed, fuel, maxAltitude, pilotName, hasBombs, hasMissiles);
-                planes.push_back(plane);
+                planes.push_back(std::move(plane));
             }
             break;
             case 8:{
