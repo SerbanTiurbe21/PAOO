@@ -7,6 +7,7 @@
 
 class Plane {
     public:
+        // no-args constructor
         Plane();
 
         // constructor
@@ -14,6 +15,9 @@ class Plane {
 
         // copy constructor
         Plane(const Plane &plane);
+
+        // move constructor
+        Plane(Plane &&plane);
 
         // assignment operator
         Plane& operator=(const Plane& other);

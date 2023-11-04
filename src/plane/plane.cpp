@@ -55,6 +55,24 @@ Plane::Plane(const Plane &plane){
     this->pilot = new Pilot(*(plane.pilot));
 }
 
+// MOVE CONSTRUCTOR
+/*
+    used when we want to move an object
+    for example: Plane plane2(std::move(plane)); where plane already is an existing object -> this will call the move constructor
+    we use std::move to move the object
+*/
+Plane::Plane(Plane &&plane){
+    // here we use std::move beacause the model is a string and we want to move it
+    this->model = std::move(plane.model);
+    this->capacity = plane.capacity;
+    this->maxSpeed = plane.maxSpeed;
+    this->fuelCapacity = plane.fuelCapacity;
+    this->maxAltitute = plane.maxAltitute;
+    this->pilot = plane.pilot;
+    plane.pilot = nullptr;
+
+     std::cout << "Move constructor called for plane: " << this->model << std::endl;
+}
 // ASSIGNMENT OPERATOR
 /*
     used when we want to assign an object to another

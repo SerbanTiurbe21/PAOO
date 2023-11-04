@@ -15,6 +15,7 @@ void menu(){
     std::cout << "5. Copy one plane to another using overloaded assignment operator" << std::endl;
     std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
     std::cout << "7. Add a new military plane" << std::endl;
+    std::cout << "8. Transfer a plane to a new owner (demonstrate move constructor)" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -150,6 +151,36 @@ int main(int, char**){
                 std::cin >> hasMissiles;
                 MilitaryPlane plane(model, capacity, speed, fuel, maxAltitude, pilotName, hasBombs, hasMissiles);
                 planes.push_back(plane);
+            }
+            break;
+            case 8:{
+                if(planes.empty()){
+                    std::cout << "There are no planes in the hangar." << std::endl;
+                    break;
+                }
+
+                std::cout << "Transfer a plane to a new owner" << std::endl;
+                std::cout << "Enter the index of the source plane: ";
+                int sourceIndex;
+                std::cin >> sourceIndex;
+
+                if (sourceIndex < 0 || sourceIndex >= planes.size()) {
+                    std::cout << "Invalid indices." << std::endl;
+                } else {
+                    Plane plane = std::move(planes[sourceIndex]);
+                    planes.pop_back();
+                    std::cout << "Successfully moved the plane." << std::endl;
+                }
+                // std::cout << "Transferring a plane to a new owner" << std::endl;
+                // if (!planes.empty()) {
+                //     std::cout << "Transferring the last plane in the hangar" << std::endl;
+                //     Plane movedPlane = std::move(planes.back()); // calls move constructor
+                //     planes.pop_back(); // remove the original after moving
+                //     // Optionally, handle the movedPlane
+                //     // ...
+                // } else {
+                //     std::cout << "Hangar is empty, no plane to transfer!" << std::endl;
+                // }
             }
             break;
             case 0:
