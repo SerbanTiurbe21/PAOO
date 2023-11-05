@@ -69,6 +69,7 @@ int main(int, char**){
                 std::string name;
                 std::cin >> name;
                 Pilot pilot(name);
+                pilot.performDuties();
                 pilots.push_back(pilot);
             }
             break;

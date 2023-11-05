@@ -1,4 +1,5 @@
 # here we include the subdirectory containing our PlaneLibrary and PilotLibrary
+add_subdirectory(crew-member)
 add_subdirectory(military-plane)
 add_subdirectory(pilot)
 add_subdirectory(plane)

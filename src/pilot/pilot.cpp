@@ -12,6 +12,10 @@ namespace Aviation{
         std::cout << "Pilot " << this->name << " destroyed" << std::endl;
     }
 
+    void Pilot::performDuties() {
+        std::cout << this->getName() << " is performing duties as a pilot." << std::endl;
+    }
+
     // GETTERS AND SETTERS
     std::string Pilot::getName(){
         return this->name;
