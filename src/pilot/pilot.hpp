@@ -4,21 +4,23 @@
 
 #include <string>
 
-class Pilot{
-    public:
-        // constructor
-        Pilot(std::string name);
+namespace Aviation{
+    class Pilot{
+        public:
+            // constructor
+            Pilot(std::string name);
 
-        // destructor
-        ~Pilot();
+            // destructor
+            ~Pilot();
 
-        // getters
-        std::string getName();
+            // getters
+            std::string getName();
 
-        // setters
-        void setName(std::string name);
-    private:
-        std::string name;
-};
+            // setters
+            void setName(std::string name);
+        private:
+            std::string name;
+    };    
+}
 
 #endif

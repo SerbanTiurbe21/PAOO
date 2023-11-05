@@ -4,6 +4,8 @@
 #include "militaryPlane.hpp"
 #include <vector>
 
+using namespace Aviation;
+
 // THE MENU FUNCTION FOR THE USER INTERFACE
 void menu(){
     std::cout << "-------------------------------------------" << std::endl;
