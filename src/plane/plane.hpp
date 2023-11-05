@@ -1,41 +1,54 @@
+// Include guard
+#ifndef PLANE_HPP
+#define PLANE_HPP
+
 #include <string>
 #include "pilot.hpp"
 
-class Plane {
-    public:
-        // constructor
-        Plane(std::string model, int capacity, double maxSpeed, double fuelCapacity, double maxAltitute, std::string pilotName);
+namespace Aviation{
+    class Plane {
+        public:
+            // no-args constructor
+            Plane();
 
-        // copy constructor
-        Plane(const Plane &plane);
+            // constructor
+            Plane(std::string model, int capacity, double maxSpeed, double fuelCapacity, double maxAltitute, std::string pilotName);
 
-        // assignment operator
-        Plane& operator=(const Plane& other);
+            // copy constructor
+            Plane(const Plane &plane);
 
-        // destructor
-        ~Plane();
+            // move constructor
+            Plane(Plane &&plane);
 
-        // getters
-        std::string getModel();
-        int getCapacity();
-        double getMaxSpeed();
-        double getFuelCapacity();
-        double getMaxAltitute();
-        Pilot* getPilot();
-        
-        // setters
-        void setModel(std::string model);
-        void setCapacity(int capacity);
-        void setMaxSpeed(double maxSpeed);
-        void setFuelCapacity(double fuelCapacity);
-        void setMaxAltitute(double maxAltitute);
-        void setPilot(Pilot *pilot);
+            // assignment operator
+            Plane& operator=(const Plane& other);
 
-    private:
-        std::string model;
-        int capacity;
-        double maxSpeed;
-        double fuelCapacity;
-        double maxAltitute;
-        Pilot *pilot;
-};
+            // destructor
+            ~Plane();
+
+            // getters
+            std::string getModel();
+            int getCapacity();
+            double getMaxSpeed();
+            double getFuelCapacity();
+            double getMaxAltitute();
+            Pilot* getPilot();
+            
+            // setters
+            void setModel(std::string model);
+            void setCapacity(int capacity);
+            void setMaxSpeed(double maxSpeed);
+            void setFuelCapacity(double fuelCapacity);
+            void setMaxAltitute(double maxAltitute);
+            void setPilot(Pilot *pilot);
+
+        private:
+            std::string model;
+            int capacity;
+            double maxSpeed;
+            double fuelCapacity;
+            double maxAltitute;
+            Pilot *pilot;
+    };
+}
+#endif

@@ -3,22 +3,28 @@
 #define PILOT_HPP
 
 #include <string>
+#include "crewMember.hpp"
 
-class Pilot{
-    public:
-        // constructor
-        Pilot(std::string name);
+namespace Aviation{
+    class Pilot : public CrewMember{
+        public:
+            // constructor
+            Pilot(std::string name);
 
-        // destructor
-        ~Pilot();
+            // destructor
+            ~Pilot();
 
-        // getters
-        std::string getName();
+            // methods from CrewMember
+            void performDuties() override;
 
-        // setters
-        void setName(std::string name);
-    private:
-        std::string name;
-};
+            // getters
+            std::string getName();
+
+            // setters
+            void setName(std::string name);
+        private:
+            std::string name;
+    };    
+}
 
 #endif
