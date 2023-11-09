@@ -4,6 +4,7 @@
 #include "copilot.hpp"
 #include "militaryPlane.hpp"
 #include <vector>
+#include <list>
 
 using namespace Aviation;
 
@@ -19,7 +20,7 @@ void menu(){
     std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
     std::cout << "7. Add a new military plane" << std::endl;
     std::cout << "8. Transfer a plane to a new owner (demonstrate move constructor)" << std::endl;
-    std::cout << "9. Add a new copilot" << std::endl;
+    std::cout << "9. Add a new copilot in a list (insertion is more easy - using push_front)" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -39,7 +40,7 @@ int main(int, char**){
 
     // Association of pilots
     std::vector<Pilot> pilots;
-    std::vector<Copilot> copilots;
+    std::list<Copilot> copilots;
 
     do{
         menu();
@@ -197,7 +198,7 @@ int main(int, char**){
                 std::cin >> status;
                 Copilot copilot(name, id, type, status);
                 copilot.performDuties();
-                copilots.push_back(copilot);
+                copilots.push_front(copilot);
             }
             break;
             case 0:
