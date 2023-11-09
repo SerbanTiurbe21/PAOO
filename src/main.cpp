@@ -1,6 +1,7 @@
 #include <iostream>
 #include "plane.hpp"
 #include "pilot.hpp"
+#include "copilot.hpp"
 #include "militaryPlane.hpp"
 #include <vector>
 
@@ -18,6 +19,7 @@ void menu(){
     std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
     std::cout << "7. Add a new military plane" << std::endl;
     std::cout << "8. Transfer a plane to a new owner (demonstrate move constructor)" << std::endl;
+    std::cout << "9. Add a new copilot" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -37,6 +39,7 @@ int main(int, char**){
 
     // Association of pilots
     std::vector<Pilot> pilots;
+    std::vector<Copilot> copilots;
 
     do{
         menu();
@@ -178,6 +181,23 @@ int main(int, char**){
                         std::cout << "Plane " << i << ": " << secondHangar[i].getModel() << " " << secondHangar[i].getPilot()->getName() << std::endl;
                     }
                 }
+            }
+            break;
+            case 9:{
+                std::cout << "Add a new copilot" << std::endl;
+                std::string name, type, status;
+                int id;
+                std::cout << "Name: "<< std::endl;
+                std::cin >> name;
+                std::cout << "Id: "<< std::endl;
+                std::cin >> id;
+                std::cout << "Type: "<< std::endl;
+                std::cin >> type;
+                std::cout << "Status: "<< std::endl;
+                std::cin >> status;
+                Copilot copilot(name, id, type, status);
+                copilot.performDuties();
+                copilots.push_back(copilot);
             }
             break;
             case 0:
