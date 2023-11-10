@@ -5,12 +5,13 @@ add_subdirectory(pilot)
 add_subdirectory(plane)
 add_subdirectory(copilot)
 add_subdirectory(utilities)
+add_subdirectory(cargo-holder)
 
 # here we create an executable target
 add_executable(MyExecutable main.cpp)
 
 # here we link PlaneLibrary and PilotLibrary to the executable
-target_link_libraries(MyExecutable PRIVATE PlaneLibrary PilotLibrary MilitaryPlaneLibrary CrewMemberLibrary CopilotLibrary)
+target_link_libraries(MyExecutable PRIVATE PlaneLibrary PilotLibrary MilitaryPlaneLibrary CrewMemberLibrary CopilotLibrary UtilitiesLibrary CargoHolderLibrary)
 
 # here we include the plane directory and pilot directory so that plane.hpp and pilot.hpp can be found
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/plane)
@@ -19,3 +20,4 @@ target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/mili
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/crew-member)
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/copilot)
 target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/utilities)
+target_include_directories(MyExecutable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/cargo-holder)

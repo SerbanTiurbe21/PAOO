@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include "InfoRetriever.hpp"
+#include "cargo-holder.hpp"
 
 using namespace Aviation;
 
@@ -23,6 +24,7 @@ void menu(){
     std::cout << "8. Transfer a plane to a new owner (demonstrate move constructor)" << std::endl;
     std::cout << "9. Add a new copilot in a list (insertion is more easy - using push_front)" << std::endl;
     std::cout << "10. Get the distance to International Space Station (using template function)" << std::endl;
+    std::cout << "11. Example of template class" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -208,6 +210,18 @@ int main(int, char**){
                 std::cout << "Distance in meteres to ISS: " << getMetersToInternationalSpaceStation(plane) << std::endl;
                 MilitaryPlane militaryPlane = MilitaryPlane("Boeing", 300, 300, 300, 15500, "John", true, true);
                 std::cout << "Distance in meteres to ISS: " << getMetersToInternationalSpaceStation(militaryPlane) << std::endl;
+            }
+            break;
+            case 11:{
+                CargoHolder<std::string> luggageHold(100);
+                luggageHold.addItem("Luggage1");
+                luggageHold.addItem("Luggage2");
+                std::cout << "Luggage count: " << luggageHold.getItemCount() << std::endl;
+
+                CargoHolder<int> cargoHold(50);
+                cargoHold.addItem(123);
+                cargoHold.addItem(456);
+                std::cout << "Cargo count: " << cargoHold.getItemCount() << std::endl;
             }
             break;
             case 0:
