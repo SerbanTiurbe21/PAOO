@@ -49,7 +49,12 @@ namespace Aviation{
             double maxSpeed;
             double fuelCapacity;
             double maxAltitute;
-            // we use unique_ptr because we want to have only one pilot for each plane
+            /*
+                we use unique_ptr because we want to have only one pilot for each plane
+                automatic resource management (destructor is called automatically when the plane object is destroyed)
+                ownership semantics -> std::unique_ptr expresses exclusive ownership of the object it points to
+                safety -> It prevents issues like double deletion and dangling pointers, which can occur with raw pointers.
+            */
             std::unique_ptr<Pilot> pilot;
     };
 }

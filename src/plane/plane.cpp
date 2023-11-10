@@ -100,6 +100,7 @@ namespace Aviation{
 
     // DESTRUCTOR
     Plane::~Plane(){
+        // removed deletion of the pilot object because we use unique_ptr and it will be deleted automatically when the plane object is destroyed
         std::cout << "Plane " << this->model << " destroyed" << std::endl;
     }
 
