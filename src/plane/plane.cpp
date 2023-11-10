@@ -54,7 +54,8 @@ namespace Aviation{
         this->maxSpeed = plane.maxSpeed;
         this->fuelCapacity = plane.fuelCapacity;
         this->maxAltitute = plane.maxAltitute;
-        this->pilot = std::make_unique<Pilot>(*(plane.pilot));
+        // we check if the plane has a pilot and if it has we create a new pilot object and we copy the content from the source plane object's pilot into it, if not we set it to nullptr
+        this->pilot = plane.pilot ? std::make_unique<Pilot>(*plane.pilot) : nullptr;
     }
 
     // MOVE CONSTRUCTOR
@@ -91,18 +92,13 @@ namespace Aviation{
             this->fuelCapacity = other.fuelCapacity;
             this->maxAltitute = other.maxAltitute;
             // there is no need to set the oter.pilot to nullptr because we use unique_ptr
-            this->pilot = std::make_unique<Pilot>(*(other.pilot));
+            // also a simple null check because if the other.pilot is null and we try to dereference it we will get an undefined behaviour
+            this->pilot = other.pilot ? std::make_unique<Pilot>(*(other.pilot)) : nullptr;
         }
         return *this;
     }
 
     // DESTRUCTOR
-    /*
-        we delete the pilot object because it was created with new in the constructor
-        so it is allocated on the heap and not on the stack like the other variables
-        and we want to empty the heap memory
-        if we don't delete it, we will have a memory leak
-    */
     Plane::~Plane(){
         std::cout << "Plane " << this->model << " destroyed" << std::endl;
     }

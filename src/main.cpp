@@ -84,7 +84,7 @@ int main(int, char**){
             case 3:{
                 std::cout << "Get all the planes from the hangar" << std::endl;
                 for(int i = 0; i < planes.size(); i++){
-                    std::cout << "Plane " << i << ": " << planes[i].getModel() << " " << planes[i].getPilot()->getName() << std::endl;
+                    std::cout << "Plane " << i << ": " << planes[i].getModel() << " with pilot " << planes[i].getPilot()->getName() << std::endl;
                 }
             }
             break;
@@ -135,6 +135,7 @@ int main(int, char**){
                 } else {
                     Plane plane = Plane(planes[sourceIndex]);
                     planes.push_back(plane);
+                    pilots.push_back(*plane.getPilot());
                     std::cout << "Successfully copied the plane." << std::endl;
                 }
             }
