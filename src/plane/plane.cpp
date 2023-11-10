@@ -11,7 +11,7 @@ namespace Aviation{
         this->maxSpeed = 0;
         this->fuelCapacity = 0;
         this->maxAltitute = 0;
-        pilot = new Pilot("");
+        this->pilot = nullptr;
     }
 
     // CONSTRUCTOR
@@ -26,7 +26,8 @@ namespace Aviation{
         this->maxSpeed = maxSpeed;
         this->fuelCapacity = fuelCapacity;
         this->maxAltitute = maxAltitute;
-        pilot = new Pilot(pilotName);
+        // folosim make_unique pentru ca pilot este un pointer si vrem sa il alocam pe heap si folosim std::move pentru ca pilotName este un string si vrem sa il mutam
+        pilot = std::make_unique<Pilot>(std::move(pilotName));
     }
 
     // COPY CONSTRUCTOR
@@ -53,7 +54,7 @@ namespace Aviation{
         this->maxSpeed = plane.maxSpeed;
         this->fuelCapacity = plane.fuelCapacity;
         this->maxAltitute = plane.maxAltitute;
-        this->pilot = new Pilot(*(plane.pilot));
+        this->pilot = std::make_unique<Pilot>(*(plane.pilot));
     }
 
     // MOVE CONSTRUCTOR
@@ -72,8 +73,7 @@ namespace Aviation{
         this->maxSpeed = plane.maxSpeed;
         this->fuelCapacity = plane.fuelCapacity;
         this->maxAltitute = plane.maxAltitute;
-        this->pilot = plane.pilot;
-        plane.pilot = nullptr;
+        this->pilot = std::move(plane.pilot);
 
         std::cout << "Move constructor called for plane: " << this->model << std::endl;
     }
@@ -84,21 +84,15 @@ namespace Aviation{
         we use & to get the address of the object
     */
     Plane& Plane::operator=(const Plane& other) {
-        // the case where we assign an object to itself and we want to return the object
-        if (this == &other){
-            return *this;  
-        } 
-        // delete the pilot object because it was created with new in the constructor 
-        delete this->pilot;
-        // here we implement the deep copy logic
-        this->pilot = new Pilot(*(other.pilot));
-        // here we copy the other fields
-        this->model = other.model;
-        this->capacity = other.capacity;
-        this->maxSpeed = other.maxSpeed;
-        this->fuelCapacity = other.fuelCapacity;
-        this->maxAltitute = other.maxAltitute;
-        // return the object
+        if (this != &other) {
+            this->model = other.model;
+            this->capacity = other.capacity;
+            this->maxSpeed = other.maxSpeed;
+            this->fuelCapacity = other.fuelCapacity;
+            this->maxAltitute = other.maxAltitute;
+            // there is no need to set the oter.pilot to nullptr because we use unique_ptr
+            this->pilot = std::make_unique<Pilot>(*(other.pilot));
+        }
         return *this;
     }
 
@@ -111,11 +105,7 @@ namespace Aviation{
     */
     Plane::~Plane(){
         std::cout << "Plane " << this->model << " destroyed" << std::endl;
-        if(pilot != nullptr){
-            delete pilot;
-        }
     }
-
 
     // GETTERS
     /*
@@ -143,7 +133,7 @@ namespace Aviation{
     }
 
     Pilot* Plane::getPilot(){
-        return this->pilot;
+        return this->pilot.get();
     }
 
     // SETTERS
@@ -167,7 +157,7 @@ namespace Aviation{
         this->maxAltitute = maxAltitute;
     }
 
-    void Plane::setPilot(Pilot *pilot){
-        this->pilot = pilot;
+    void Plane::setPilot(std::string pilotName){
+        this->pilot = std::make_unique<Pilot>(std::move(pilotName));
     }
 }

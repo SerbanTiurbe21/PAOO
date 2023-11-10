@@ -4,6 +4,7 @@
 
 #include <string>
 #include "pilot.hpp"
+#include <memory>
 
 namespace Aviation{
     class Plane {
@@ -40,7 +41,7 @@ namespace Aviation{
             void setMaxSpeed(double maxSpeed);
             void setFuelCapacity(double fuelCapacity);
             void setMaxAltitute(double maxAltitute);
-            void setPilot(Pilot *pilot);
+            void setPilot(std::string pilotName);
 
         private:
             std::string model;
@@ -48,7 +49,8 @@ namespace Aviation{
             double maxSpeed;
             double fuelCapacity;
             double maxAltitute;
-            Pilot *pilot;
+            // we use unique_ptr because we want to have only one pilot for each plane
+            std::unique_ptr<Pilot> pilot;
     };
 }
 #endif
