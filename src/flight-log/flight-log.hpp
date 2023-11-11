@@ -10,6 +10,8 @@ namespace Aviation{
             std::vector<std::string> logEntries;
         public:
             void addEntry(const std::string& entry);
+            int getEntryCount();
+            ~FlightLog();
     };
 }
 

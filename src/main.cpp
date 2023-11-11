@@ -25,6 +25,7 @@ void menu(){
     std::cout << "9. Add a new copilot in a list (insertion is more easy - using push_front)" << std::endl;
     std::cout << "10. Get the distance to International Space Station (using template function)" << std::endl;
     std::cout << "11. Example of template class" << std::endl;
+    std::cout << "12. Example of shared pointer" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -223,6 +224,22 @@ int main(int, char**){
                 cargoHold.addItem(123);
                 cargoHold.addItem(456);
                 std::cout << "Cargo count: " << cargoHold.getItemCount() << std::endl;
+            }
+            break;
+            case 12:{
+                std::shared_ptr<FlightLog> flightLog = std::make_shared<FlightLog>();
+                flightLog->addEntry("Entry1");
+                flightLog->addEntry("Entry2");
+                std::cout << "Initial plane1 flight log entries: " << flightLog->getEntryCount() << std::endl;
+
+                Plane plane = Plane("Boeing", 100, 100, 100, 12000, "John");
+                plane.setFlightLog(flightLog);
+
+                Plane secondPlane = Plane("Airbus", 200, 200, 200, 15000, "Ionel");
+                secondPlane.setFlightLog(flightLog);
+                secondPlane.addFlightLogEntry("Entry3");
+
+                std::cout << "Modified plane1 flight log entries: " << plane.getFlightLog()->getEntryCount() << std::endl;
             }
             break;
             case 0:

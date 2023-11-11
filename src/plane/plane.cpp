@@ -133,6 +133,10 @@ namespace Aviation{
         return this->pilot.get();
     }
 
+    std::shared_ptr<FlightLog> Plane::getFlightLog(){
+        return this->flightLog;
+    }
+
     // SETTERS
     void Plane::setModel(std::string model){
         this->model = model;
@@ -156,5 +160,15 @@ namespace Aviation{
 
     void Plane::setPilot(std::string pilotName){
         this->pilot = std::make_unique<Pilot>(std::move(pilotName));
+    }
+
+    void Plane::setFlightLog(std::shared_ptr<FlightLog> log){
+        this->flightLog = log;
+    }
+
+    void Plane::addFlightLogEntry(std::string entry){
+        if(this->flightLog){
+            this->flightLog->addEntry(entry);
+        }
     }
 }
