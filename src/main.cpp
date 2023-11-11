@@ -4,6 +4,9 @@
 #include "copilot.hpp"
 #include "militaryPlane.hpp"
 #include <vector>
+#include <list>
+#include "InfoRetriever.hpp"
+#include "cargo-holder.hpp"
 
 using namespace Aviation;
 
@@ -19,7 +22,10 @@ void menu(){
     std::cout << "6. Create a new plane based on an existing one using copy constructor" << std::endl;
     std::cout << "7. Add a new military plane" << std::endl;
     std::cout << "8. Transfer a plane to a new owner (demonstrate move constructor)" << std::endl;
-    std::cout << "9. Add a new copilot" << std::endl;
+    std::cout << "9. Add a new copilot in a list (insertion is more easy - using push_front)" << std::endl;
+    std::cout << "10. Get the distance to International Space Station (using template function)" << std::endl;
+    std::cout << "11. Example of template class" << std::endl;
+    std::cout << "12. Example of shared pointer" << std::endl;
     std::cout << "0. Exit" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 }
@@ -39,7 +45,7 @@ int main(int, char**){
 
     // Association of pilots
     std::vector<Pilot> pilots;
-    std::vector<Copilot> copilots;
+    std::list<Copilot> copilots;
 
     do{
         menu();
@@ -79,7 +85,7 @@ int main(int, char**){
             case 3:{
                 std::cout << "Get all the planes from the hangar" << std::endl;
                 for(int i = 0; i < planes.size(); i++){
-                    std::cout << "Plane " << i << ": " << planes[i].getModel() << " " << planes[i].getPilot()->getName() << std::endl;
+                    std::cout << "Plane " << i << ": " << planes[i].getModel() << " with pilot " << planes[i].getPilot()->getName() << std::endl;
                 }
             }
             break;
@@ -130,6 +136,7 @@ int main(int, char**){
                 } else {
                     Plane plane = Plane(planes[sourceIndex]);
                     planes.push_back(plane);
+                    pilots.push_back(*plane.getPilot());
                     std::cout << "Successfully copied the plane." << std::endl;
                 }
             }
@@ -197,7 +204,42 @@ int main(int, char**){
                 std::cin >> status;
                 Copilot copilot(name, id, type, status);
                 copilot.performDuties();
-                copilots.push_back(copilot);
+                copilots.push_front(copilot);
+            }
+            break;
+            case 10:{
+                Plane plane = Plane("Boeing", 100, 100, 100, 12000, "John");
+                std::cout << "Distance in meteres to ISS: " << getMetersToInternationalSpaceStation(plane) << std::endl;
+                MilitaryPlane militaryPlane = MilitaryPlane("Boeing", 300, 300, 300, 15500, "John", true, true);
+                std::cout << "Distance in meteres to ISS: " << getMetersToInternationalSpaceStation(militaryPlane) << std::endl;
+            }
+            break;
+            case 11:{
+                CargoHolder<std::string> luggageHold(100);
+                luggageHold.addItem("Luggage1");
+                luggageHold.addItem("Luggage2");
+                std::cout << "Luggage count: " << luggageHold.getItemCount() << std::endl;
+
+                CargoHolder<int> cargoHold(50);
+                cargoHold.addItem(123);
+                cargoHold.addItem(456);
+                std::cout << "Cargo count: " << cargoHold.getItemCount() << std::endl;
+            }
+            break;
+            case 12:{
+                std::shared_ptr<FlightLog> flightLog = std::make_shared<FlightLog>();
+                flightLog->addEntry("Entry1");
+                flightLog->addEntry("Entry2");
+                std::cout << "Initial plane1 flight log entries: " << flightLog->getEntryCount() << std::endl;
+
+                Plane plane = Plane("Boeing", 100, 100, 100, 12000, "John");
+                plane.setFlightLog(flightLog);
+
+                Plane secondPlane = Plane("Airbus", 200, 200, 200, 15000, "Ionel");
+                secondPlane.setFlightLog(flightLog);
+                secondPlane.addFlightLogEntry("Entry3");
+
+                std::cout << "Modified plane1 flight log entries: " << plane.getFlightLog()->getEntryCount() << std::endl;
             }
             break;
             case 0:

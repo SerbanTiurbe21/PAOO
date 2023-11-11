@@ -4,6 +4,8 @@
 
 #include <string>
 #include "pilot.hpp"
+#include "flight-log.hpp"
+#include <memory>
 
 namespace Aviation{
     class Plane {
@@ -33,6 +35,7 @@ namespace Aviation{
             double getFuelCapacity();
             double getMaxAltitute();
             Pilot* getPilot();
+            std::shared_ptr<FlightLog> getFlightLog();
             
             // setters
             void setModel(std::string model);
@@ -40,7 +43,9 @@ namespace Aviation{
             void setMaxSpeed(double maxSpeed);
             void setFuelCapacity(double fuelCapacity);
             void setMaxAltitute(double maxAltitute);
-            void setPilot(Pilot *pilot);
+            void setPilot(std::string pilotName);
+            void setFlightLog(std::shared_ptr<FlightLog> log);
+            void addFlightLogEntry(std::string entry);
 
         private:
             std::string model;
@@ -48,7 +53,19 @@ namespace Aviation{
             double maxSpeed;
             double fuelCapacity;
             double maxAltitute;
-            Pilot *pilot;
+            /*
+                we use unique_ptr because we want to have only one pilot for each plane
+                automatic resource management (destructor is called automatically when the plane object is destroyed)
+                ownership semantics -> std::unique_ptr expresses exclusive ownership of the object it points to
+                safety -> It prevents issues like double deletion and dangling pointers, which can occur with raw pointers.
+            */
+            std::unique_ptr<Pilot> pilot;
+            /*
+                we use shared_ptr because we want to have multiple flight logs for each plane
+                Multiple Plane objects might share access to the same FlightLog if they are part of the same flight series or operation. 
+                In this case, using a std::shared_ptr<FlightLog> would be appropriate.
+            */
+            std::shared_ptr<FlightLog> flightLog;
     };
 }
 #endif
